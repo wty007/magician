@@ -1,61 +1,19 @@
+magician是基于spring-cloud实现的微服务的框架，其中包括配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等。
 
-windows项目运行步骤:
-```
+项目启动步骤：
 
-cd script
+1、先install阿里云用到的jar
+   cd ./script
+   sh install-jar.sh
 
-call install-jar.bat
+2、install magician
 
-cd ..
+3、优先启动eureka，然后在启动其他服务
 
-mvn clean package
+4、模块说明：
+   ➀common-* ：公共代码
+   ➁platform-*：架构平台服务
+   ➂service-*：业务服务
 
-start /b java -Xmx256m -jar platform-eureka-server/target/platform-eureka-server-1.0.0-SNAPSHOT.jar >.\log\eureka-server.log &
-start /b java -Xmx256m -jar platform-zipkin-server/target/platform-zipkin-server-1.0.0-SNAPSHOT.jar >.\log\zipkin-server.log &
-start /b java -Xmx256m -jar platform-admin-dashboard/target/platform-admin-dashboard-1.0.0-SNAPSHOT.jar >.\log\admin-dashboard.log &
-start /b java -Xmx256m -jar platform-config-server/target/platform-config-server-1.0.0-SNAPSHOT.jar >.\log\config-server.log &
 
-start /b java -Xmx256m -jar ui-admin/target/admin-ui-1.0.0-SNAPSHOT.jar >.\log\admin.log &
-start /b java -Xmx256m -jar api/target/api-1.0.0-SNAPSHOT.jar >.\log\api.log &
-start /b java -Xmx256m -jar service-hotel/target/hotel-service-1.0.0-SNAPSHOT.jar >.\log\hotel-service.log &
-start /b java -Xmx256m -jar service-dict/target/dict-service-1.0.0-SNAPSHOT.jar  >.\log\dict-service.log &
-start /b java -Xmx256m -jar service-line/target/line-service-1.0.0-SNAPSHOT.jar  >.\log\line-service.log &
-start /b java -Xmx256m -jar service-scenery/target/scenery-service-1.0.0-SNAPSHOT.jar  >.\log\scenery-service.log &
-start /b java -Xmx256m -jar service-member/target/member-service-1.0.0-SNAPSHOT.jar  >.\log\member-service.log &
-start /b java -Xmx256m -jar service-visa\target\visa-service-1.0.0-SNAPSHOT.jar  >.\log\visa-service.log &
-start /b java -Xmx256m -jar service-verify-code\target\verify-code-service-1.0.0-SNAPSHOT.jar  >.\log\verify-code-service.log &
-start /b java -Xmx256m -jar service-sms\target\sms-service-1.0.0-SNAPSHOT.jar  >.\log\sms-service.log &
-start /b java -Xmx256m -jar service-oss\target\oss-service-1.0.0-SNAPSHOT.jar  >.\log\oss-service.log &
-
-```
-
-linux
-```
-
-cd script
-
-sh ./install-jar.sh
-
-cd ..
-
-mvn clean package
-
-java -Xmx256m -jar platform-eureka-server\target\platform-eureka-server-1.0.0-SNAPSHOT.jar >./log/eureka-server.log &
-java -Xmx256m -jar platform-zipkin-server\target\platform-zipkin-server-1.0.0-SNAPSHOT.jar >./log/zipkin-server.log &
-java -Xmx256m -jar platform-admin-dashboard\target\platform-admin-dashboard-1.0.0-SNAPSHOT.jar >./log/admin-dashboard.log &
-java -Xmx256m -jar platform-config-server\target\platform-config-server-1.0.0-SNAPSHOT.jar >./log/config-server.log &
-
-java -Xmx256m -jar ui-admin\target\admin-ui-1.0.0-SNAPSHOT.jar >./log/admin.log &
-java -Xmx256m -jar api\target\api-1.0.0-SNAPSHOT.jar >./log/api.log &
-java -Xmx256m -jar service-hotel\target\hotel-service-1.0.0-SNAPSHOT.jar >./log/hotel-service.log &
-java -Xmx256m -jar service-dict\target\dict-service-1.0.0-SNAPSHOT.jar  >./log/dict-service.log &
-java -Xmx256m -jar service-line\target\line-service-1.0.0-SNAPSHOT.jar  >./log/line-service.log &
-java -Xmx256m -jar service-scenery\target\scenery-service-1.0.0-SNAPSHOT.jar  >./log/scenery-service.log &
-java -Xmx256m -jar service-member\target\member-service-1.0.0-SNAPSHOT.jar  >./log/member-service.log &
-java -Xmx256m -jar service-visa\target\visa-service-1.0.0-SNAPSHOT.jar  >./log/visa-service.log &
-java -Xmx256m -jar service-verify-code\target\verify-code-service-1.0.0-SNAPSHOT.jar  >./log/visa-service.log &
-java -Xmx256m -jar service-sms\target\sms-service-1.0.0-SNAPSHOT.jar  >./log/sms-service.log &
-java -Xmx256m -jar service-oss\target\oss-service-1.0.0-SNAPSHOT.jar  >./log/oss-service.log &
-
-```
-
+PS:该框架仅仅是一个雏形，尚不完善，环境一起学习交流。
