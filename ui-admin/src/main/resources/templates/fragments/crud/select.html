@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="prototype(name,label,options,isRequired)" class="form-group">
+    <label th:replace="fragments/crud/label :: default(${name},${label},${isRequired})"></label>
+    <div class="col-sm-6">
+        <select th:id="${name}" th:name="${name}" class="form-control" th:classappend="${isRequired?'required':''}">
+            <option th:each="type:${options}" th:text="${type.name}" th:value="${type.id}"></option>
+        </select>
+    </div>
+</div>
+<div th:fragment="object-prototype(name,label,options,isRequired)" class="form-group">
+    <label th:replace="fragments/crud/label :: default(${name},${label},${isRequired})"></label>
+    <div class="col-sm-6">
+        <select th:id="${name}" th:name="${name+'.id'}" class="form-control"
+                th:classappend="${isRequired?'required':''}">
+            <option th:each="type:${options}" th:text="${type.name}" th:value="${type.id}"></option>
+        </select>
+    </div>
+</div>
+<div th:fragment="dict-prototype(name,label,dictType,isRequired)" class="form-group">
+    <label th:replace="fragments/crud/label :: default(${name},${label},${isRequired})"></label>
+    <div class="col-sm-6">
+        <select th:id="${name}" th:name="${name}" class="form-control" th:classappend="${isRequired?'required':''}">
+        </select>
+        <script th:inline="javascript">
+            $.get({
+                url: ctx + "dict/findByType",
+                data: {type: [[${dictType}]]},
+                error: function (request) {
+                    alert("Connection error");
+                },
+                success: function (data) {
+                    for (var i = 0; lt(i, data.length); i++) {
+                        $('#' + [[${name}]]).append('<option value="' + data[i].id + '" >' + data[i].name + '</option>');
+                    }
+                }
+            });
+        </script>
+    </div>
+</div>
+<div th:fragment="not-required-labeled(name,label,options)"
+     th:replace="fragments/crud/select :: prototype(${name},${label},${options},false)">
+</div>
+<div th:fragment="object-not-required-labeled(name,label,options)"
+     th:replace="fragments/crud/select :: object-prototype(${name},${label},${options},false)">
+</div>
+<div th:fragment="required-labeled(name,label,options)"
+     th:replace="fragments/crud/select :: prototype(${name},${label},${options},false)">
+</div>
+<div th:fragment="dict-required-labeled(name,label,dictType)"
+     th:replace="fragments/crud/select :: dict-prototype(${name},${label},${dictType},true)">
+</div>
+<div th:fragment="dict-not-required-labeled(name,label,dictType)"
+     th:replace="fragments/crud/select :: dict-prototype(${name},${label},${dictType},false)">
+</div>
+</body>
+</html>

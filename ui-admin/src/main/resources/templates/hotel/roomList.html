@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('酒店列表')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<div class="container">
+    <h5>房间列表</h5>
+    <hr/>
+    <a class="btn btn-success" href="./form">增加</a>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="hide">ID</th>
+            <th>名称</th>
+            <th>酒店ID</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="room: ${page.content}">
+            <td class="hide" th:id="${room.id}" th:text="${room.id}">Oranges</td>
+            <td th:text="${room.name}">Oranges</td>
+            <td th:text="${room.hotelId}">Oranges</td>
+            <td><a class="btn btn-primary btn-sm" th:href="@{/hotel/room/form(id=${room.id})}">修改</a>
+                <a class="btn btn-danger btn-sm"
+                   th:onclick="'del(\''+@{/hotel/room/delete}+'\',\'' + ${room.id } +'\')'">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/common :: pagination">nav</div>
+</div>
+</body>
+</html>

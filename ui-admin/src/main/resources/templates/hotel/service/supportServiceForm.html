@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<script type="text/javascript" th:src="@{/static/js/plugins/My97DatePicker/WdatePicker.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.config.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.all.js}"></script>
+<div th:replace="fragments/common :: nav">nav</div>
+<div th:replace="fragments/crud/script :: all(@{/hotel/service})">nav</div>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{./list}">返回列表</a>
+    <hr/>
+    <form id="form" class="form-horizontal" th:action="@{/hotel/service/save}" method="post">
+        <div th:replace="fragments/crud/submit :: id"></div>
+        <div th:replace="fragments/crud/input :: text-required('name','服务名称')"></div>
+        <div th:replace="fragments/crud/input :: number-required('sort','排序')"></div>
+        <div th:replace="fragments/crud/select :: object-not-required-labeled('category','所属分类',${categories})"></div>
+        <hr/>
+        <div th:replace="fragments/crud/submit :: default"></div>
+    </form>
+</div>
+</body>
+</html>

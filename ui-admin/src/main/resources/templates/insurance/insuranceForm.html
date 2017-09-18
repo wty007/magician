@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<script th:replace="fragments/crud/script :: all(@{/insurance})"></script>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{./list}">返回列表</a>
+    <hr/>
+    <form id="form" class="form-horizontal" th:action="@{/insurance/save}" method="post">
+        <div th:replace="fragments/crud/submit :: id"></div>
+        <div th:replace="fragments/crud/new-input :: text('name','[名称]')"></div>
+        <div th:replace="fragments/crud/new-input :: number('price','[价格]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('period','[期间]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('description','[描述]')"></div>
+        <hr/>
+        <div th:replace="fragments/crud/submit :: default"></div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ui-admin/admin-ui.iml" filepath="$PROJECT_DIR$/ui-admin/admin-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-constant/common-constant.iml" filepath="$PROJECT_DIR$/common-constant/common-constant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-domain/common-domain.iml" filepath="$PROJECT_DIR$/common-domain/common-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-rpc/common-rpc.iml" filepath="$PROJECT_DIR$/common-rpc/common-rpc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-service-base/common-service-base.iml" filepath="$PROJECT_DIR$/common-service-base/common-service-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-service-definition/common-service-definition.iml" filepath="$PROJECT_DIR$/common-service-definition/common-service-definition.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-util/common-util.iml" filepath="$PROJECT_DIR$/common-util/common-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-web/common-web.iml" filepath="$PROJECT_DIR$/common-web/common-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-dict/dict-service.iml" filepath="$PROJECT_DIR$/service-dict/dict-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-hotel/hotel-service.iml" filepath="$PROJECT_DIR$/service-hotel/hotel-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-line/line-service.iml" filepath="$PROJECT_DIR$/service-line/line-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/magician.iml" filepath="$PROJECT_DIR$/magician.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-member/member-service.iml" filepath="$PROJECT_DIR$/service-member/member-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-oss/oss-service.iml" filepath="$PROJECT_DIR$/service-oss/oss-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform-admin-dashboard/platform-admin-dashboard.iml" filepath="$PROJECT_DIR$/platform-admin-dashboard/platform-admin-dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform-config-server/platform-config-server.iml" filepath="$PROJECT_DIR$/platform-config-server/platform-config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform-eureka-server/platform-eureka-server.iml" filepath="$PROJECT_DIR$/platform-eureka-server/platform-eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform-zipkin-server/platform-zipkin-server.iml" filepath="$PROJECT_DIR$/platform-zipkin-server/platform-zipkin-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform-zuul/platform-zuul.iml" filepath="$PROJECT_DIR$/platform-zuul/platform-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-scenery/scenery-service.iml" filepath="$PROJECT_DIR$/service-scenery/scenery-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-sms/sms-service.iml" filepath="$PROJECT_DIR$/service-sms/sms-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-verify-code/verify-code-service.iml" filepath="$PROJECT_DIR$/service-verify-code/verify-code-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-visa/visa-service.iml" filepath="$PROJECT_DIR$/service-visa/visa-service.iml" />
+    </modules>
+  </component>
+</project>

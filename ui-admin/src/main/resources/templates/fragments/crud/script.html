@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="all(url)" th:inline="javascript">
+    <div th:replace="fragments/crud/script :: validation"></div>
+    <div th:replace="fragments/crud/script :: fetch(${url})"></div>
+    <div th:replace="fragments/crud/script :: submit"></div>
+</div>
+<script th:fragment="validation">
+    var rules = {};
+    var messages = {};
+</script>
+<script th:fragment="fetch(url)" th:inline="javascript">
+    $(document).ready(function () {
+        var url = [[${url}]];
+        var getUrl = null;
+        if (url.charAt(url.length - 1) == "/") {
+            url = url.substring(0, url.length - 1);
+        }
+        getUrl = url + '/get';
+        var id = $("#id").val();
+        if (isNotEmpty(id)) {
+            fillData({
+                url: getUrl, params: {id: id}, afterFill: function () {
+                }
+            });
+        }
+    });
+</script>
+<script th:fragment="submit">
+    var afterSaveFunctions = [];
+
+    $(document).ready(function () {
+
+        $("#form").validate({
+            rules: rules,
+            messages: messages,
+            submitHandler: function (form) {
+
+                $(form).ajaxSubmit({
+                    success: function (data) {
+
+                        console.log(data);
+
+                        for (var i = 0; lt(i, afterSaveFunctions.length); i++) {
+                            afterSaveFunctions[i](data);
+                        }
+
+                        afterAjaxSave();
+                    }
+                });
+            },
+            errorContainer: "#messageBox",
+            errorPlacement: function (error, element) {
+                $("#messageBox").html(error);
+
+                appendElementError(element, error);
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

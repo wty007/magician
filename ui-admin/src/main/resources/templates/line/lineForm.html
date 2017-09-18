@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<script type="text/javascript" th:src="@{/static/js/plugins/My97DatePicker/WdatePicker.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.config.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.all.js}"></script>
+<script th:replace="fragments/crud/script :: all(@{/line})"></script>
+<div th:replace="fragments/common :: nav">nav</div>
+<div class="container">
+    <h5>线路列表</h5>
+    <hr/>
+    <a class="btn btn-primary" th:href="@{./list}">返回列表</a>
+    <hr/>
+    <form id="form" class="form-horizontal" th:action="@{/line/save}" method="post">
+        <div th:replace="fragments/crud/submit :: id"></div>
+        <div th:replace="fragments/crud/input :: text-required('name','线路名称')"></div>
+        <div th:replace="fragments/crud/input :: text-not-required('subtitle','副标题')"></div>
+        <div th:replace="fragments/crud/new-input :: text('startCity','[出发城市]')"></div>
+        <div th:replace="fragments/crud/input :: number-required('startingPrice','起步价')"></div>
+        <div th:replace="fragments/crud/input :: number-required('marketPrice','门市价')"></div>
+        <div th:replace="fragments/crud/input :: number-not-required('highestScore','最高可获得积分')"></div>
+        <div th:replace="fragments/crud/input :: number-not-required('maxUseScore','最多可使用积分')"></div>
+        <div th:replace="fragments/crud/input :: number-not-required('recommendedDaysOfAdvance','建议提前报名天数')"></div>
+        <div th:replace="fragments/crud/input :: text-not-required('roundTripTraffic','往返交通')"></div>
+        <div th:replace="fragments/crud/new-select :: enum('orderProcessType',${orderProcessTypes},'![订单处理方式]')"></div>
+        <div th:replace="fragments/crud/new-checkbox :: dict('subject','lineSubject','![线路主题]')"></div>
+        <div th:replace="fragments/crud/input :: text-not-required('payType','支付方式')"></div>
+        <div th:replace="fragments/crud/new-input :: text('briefDescription','![简要描述]')"></div>
+        <div th:replace="fragments/crud/editor :: have-label('introduction','线路介绍')"></div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#travel-introduction" aria-controls="travel-introduction" role="tab"
+                   data-toggle="tab">行程介绍</a></li>
+            <li role="presentation">
+                <a href="#cost-introduction" aria-controls="cost-introduction" role="tab"
+                   data-toggle="tab">费用介绍</a></li>
+            <li role="presentation">
+                <a href="#booking-information" aria-controls="booking-information" role="tab"
+                   data-toggle="tab">预定须知</a>
+            </li>
+            <li role="presentation">
+                <a href="#tips-a" aria-controls="tips-a" role="tab"
+                   data-toggle="tab">温馨提示</a></li>
+            <li role="presentation">
+                <a href="#booking-process" aria-controls="booking-process" role="tab"
+                   data-toggle="tab">预订流程</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="travel-introduction">
+                <div th:replace="fragments/crud/editor :: default('travelIntroduction')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="cost-introduction">
+                <div th:replace="fragments/crud/editor :: default('costIntroduction')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="booking-information">
+                <div th:replace="fragments/crud/editor :: default('bookingInformation')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tips-a">
+                <div th:replace="fragments/crud/editor :: default('tips')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="booking-process">
+                <div th:replace="fragments/crud/editor :: default('bookingProcess')"></div>
+            </div>
+        </div>
+        <br/>
+        <div th:replace="fragments/crud/input :: number-not-required('sort','排序')"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">状态</label>
+            <div class="col-sm-6">
+                <div th:replace="fragments/crud/new-checkbox :: default('hide','隐藏')"></div>
+                <div th:replace="fragments/crud/new-checkbox :: default('recommend','推荐')"></div>
+                <div th:replace="fragments/crud/new-checkbox :: default('specialOffer','特价')"></div>
+                <div th:replace="fragments/crud/new-checkbox :: default('hotSale','热卖')"></div>
+                <div th:replace="fragments/crud/new-checkbox :: default('newProduct','新品')"></div>
+                <div th:replace="fragments/crud/new-checkbox :: default('groupPurchase','团购')"></div>
+            </div>
+        </div>
+        <hr/>
+        <div th:replace="fragments/crud/submit :: submit('提交')"></div>
+    </form>
+</div>
+</body>
+</html>

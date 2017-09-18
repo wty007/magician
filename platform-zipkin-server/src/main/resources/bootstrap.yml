@@ -1,0 +1,19 @@
+server:
+  port: 9411
+
+spring:
+  application:
+    name: zipkin-server
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+            defaultZone: http://localhost:8101/eureka/
+
+endpoints:
+     shutdown:
+      enabled: true

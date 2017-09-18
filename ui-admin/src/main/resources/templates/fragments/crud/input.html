@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="input(type,name,label,isRequired)" class="form-group">
+    <label th:replace="fragments/crud/label :: default(${name},${label},${isRequired})"></label>
+    <div class="col-sm-6">
+        <input th:type="${type}" th:name="${name}" th:id="${name}" class="form-control"
+               th:classappend="${isRequired?'required':''}"
+               th:placeholder="${label}"/>
+    </div>
+    <script th:replace="fragments/crud/valid :: default(${name},${label})"></script>
+</div>
+<div th:fragment="text-required(name,label)"
+     th:replace="fragments/crud/input :: input('text',${name},${label},true)">
+</div>
+<div th:fragment="text-not-required(name,label)"
+     th:replace="fragments/crud/input :: input('text',${name},${label},false)">
+</div>
+<div th:fragment="number-not-required(name,label)"
+     th:replace="fragments/crud/input :: input('number',${name},${label},false)">
+</div>
+<div th:fragment="number-required(name,label)"
+     th:replace="fragments/crud/input :: input('number',${name},${label},true)">
+</div>
+<div th:fragment="password-not-required(name,label)"
+     th:replace="fragments/crud/input :: input('password',${name},${label},false)">
+</div>
+<div th:fragment="password-required(name,label)"
+     th:replace="fragments/crud/input :: input('password',${name},${label},true)">
+</div>
+<div th:fragment="email-not-required(name,label)"
+     th:replace="fragments/crud/input :: input('email',${name},${label},false)">
+</div>
+<div th:fragment="email-required(name,label)"
+     th:replace="fragments/crud/input :: input('email',${name},${label},true)">
+</div>
+</body>
+</html>

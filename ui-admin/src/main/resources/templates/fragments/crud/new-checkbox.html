@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="dict-prototype(name,label,dictType,isRequired)" class="form-group">
+    <label th:replace="fragments/crud/label :: default(${name},${label},${isRequired})"></label>
+    <div class="col-sm-10">
+        <div th:id="${name}"></div>
+        <script th:inline="javascript">
+            function getCheckValues(name) {
+                var values = "";
+                var cks = document.getElementsByName(name);
+
+                for (k in cks) {
+                    if (cks[k].checked) {
+                        values += cks[k].value;
+                        values += ",";
+                    }
+                }
+
+                return values;
+
+            }
+            afterSaveFunctions.push(function (data) {
+                var dictIds = getCheckValues([[${name}]]);
+                var data = {sourceId: data.id, dictType: [[${dictType}]], dictIds: dictIds};
+                console.log(data);
+                $.post({
+                    url: ctx + "dict/many/saveBySourceIdAndDictTypeAndDictIds",
+                    data: data,
+                    error: function (request) {
+                        alert("Connection error");
+                    },
+                    success: function (data) {
+                    }
+                });
+            });
+
+            $.get({
+                url: ctx + "dict/findByType",
+                data: {type: [[${dictType}]]},
+                error: function (request) {
+                    alert("Connection error");
+                },
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; lt(i, data.length); i++) {
+                        var tempName = [[${name}]];
+
+                        var tempCheckBox = $('<input type="checkbox" />');
+                        tempCheckBox.val(data[i].id);
+                        tempCheckBox.attr('name', tempName);
+                        tempCheckBox.attr('id', tempName + '' + i);
+                        var tempLabel = $('<label>' + data[i].name + '</label>');
+                        tempLabel.attr('for', tempName + '' + i);
+                        $('#' + [[${name}]]).append(tempCheckBox);
+                        $('#' + [[${name}]]).append(tempLabel);
+                        $('#' + [[${name}]]).append("&nbsp;&nbsp;&nbsp;&nbsp;");
+                    }
+                }
+            });
+            $(document).ready(function () {
+
+                var id = $("#id").val();
+
+                if (isNotEmpty(id)) {
+                    $.get({
+                        url: ctx + "dict/many/findBySourceIdAndDictType",
+                        data: {sourceId: id, dictType: [[${dictType}]]},
+                        error: function (request) {
+                            alert("Connection error");
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            for (var i = 0; lt(i, data.length); i++) {
+                                console.log(data[i]);
+                                $("[value='" + data[i].dict.id + "']").attr("checked", 'true');//全选
+                            }
+                        }
+                    });
+                }
+            });
+        </script>
+    </div>
+</div>
+<div th:fragment="prototype(name,label)" th:remove="tag">
+    <input type="checkbox" th:name="${name}" th:id="${name}"/><label th:for="${name}" th:text="${label}"></label>
+</div>
+<div th:fragment="dict(name,dictType,feature)"
+     th:replace="fragments/crud/new-checkbox :: dict-prototype(${name},${#strings.contains(feature,'[')?(#strings.substring(feature,#strings.indexOf(feature,'[')+1,#strings.indexOf(feature,']'))):null},${dictType},${!#strings.contains(feature,'![')})">
+</div>
+<div th:fragment="default(name,label)"
+     th:replace="fragments/crud/new-checkbox :: prototype(${name},${label})">
+</div>
+</body>
+</html>

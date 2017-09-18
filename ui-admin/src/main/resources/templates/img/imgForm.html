@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<script type="text/javascript" th:src="@{/static/js/plugins/My97DatePicker/WdatePicker.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.config.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.all.js}"></script>
+<div th:replace="fragments/common :: nav">nav</div>
+<script th:replace="fragments/crud/script :: all(@{/hotel})"></script>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{./list}">返回列表</a>
+    <hr/>
+    <form id="form" class="form-horizontal" th:action="@{/img/uploadFile}" method="post"  enctype="multipart/form-data" >
+        <div th:replace="fragments/crud/submit :: id"></div>
+        <div th:replace="fragments/crud/new-input :: file('imgFile','[上传图片]')"></div>
+        <div th:replace="fragments/crud/submit :: submit('提交')"></div>
+    </form>
+</div>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        var supportServices = [];
+        /*$.get({
+            url: ctx + "hotel/service/getAll",
+            data: {},
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+
+                supportServices = data;
+
+                initSupportServiceCheckboxes(supportServices);
+
+            }
+        });*/
+    });
+
+    var initSupportServiceCheckboxes = function (supportServices) {
+
+        $.get({
+            url: ctx + "hotel/service/category/getAll",
+            data: {},
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                for (var i = 0; lt(i, data.length); i++) {
+
+                    var category = data[i];
+
+                    var html = '<hr/><div class="form-group">';
+                    html += '<span class="col-sm-2 control-label">' + category.name + '</span>';
+                    html += '<div class="col-sm-10">';
+                    for (var j = 0; lt(j, supportServices.length); j++) {
+                        if (supportServices[j].category.id == category.id) {
+                            html += '<input type="checkbox" id="' + supportServices[j].id + '" value="' + supportServices[j].id + '" name="supportServiceIds" /><label for="' + supportServices[j].id + '">' + supportServices[j].name + '</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                        }
+                    }
+                    html += '</div></div>';
+
+                    $("#supportServiceDiv").append(html);
+                }
+                checkSupportService();
+            }
+        });
+    }
+
+    var checkSupportService = function () {
+        var id = $("#id").val();
+        if (isNotEmpty(id)) {
+            setTimeout(function () {
+                $.get({
+                    url: ctx + "hotel/support/service/get",
+                    data: {hotelId: id},
+                    error: function (request) {
+                        alert("Connection error");
+                    },
+                    success: function (data) {
+                        for (var i = 0; lt(i, data.length); i++) {
+                            var service = data[i].service;
+                            $("[value=" + service.id + "]").attr("checked", true);
+                        }
+                    }
+                });
+            }, 2000);
+        }
+    }
+</script>
+</body>
+</html>

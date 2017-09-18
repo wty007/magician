@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('签证列表')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<div class="container">
+    <h5>保险列表</h5>
+    <hr/>
+    <a class="btn btn-success" href="./form">增加</a>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="hide">ID</th>
+            <th>名称</th>
+            <th>价格</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="insurance: ${page.content}">
+            <td class="hide" th:id="${insurance.id}" th:text="${insurance.id}">Oranges</td>
+            <td th:text="${insurance.name}">Oranges</td>
+            <td><a class="btn btn-primary btn-sm" th:href="@{/insurance/form(id=${insurance.id})}">修改</a>
+                <a class="btn btn-danger btn-sm"
+                   th:onclick="'del(\''+@{/insurance/delete}+'\',\'' + ${insurance.id } +'\')'">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/common :: pagination"></div>
+</div>
+</body>
+</html>

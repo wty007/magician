@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<script th:replace="fragments/crud/script :: all(@{/scenery/ticket})"></script>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{./list}">返回列表</a>
+    <hr/>]
+    <form id="form" class="form-horizontal" th:action="@{/scenery/ticket/save}" method="post">
+        <div th:replace="fragments/crud/submit :: id"></div>
+        <div th:replace="fragments/crud/new-input :: text('name','[门票名称]')"></div>
+        <div th:replace="fragments/crud/new-select :: default('sceneryId',${sceneryList},'[景区ID]')"></div>
+        <div th:replace="fragments/crud/new-input :: number('marketPrice','![市场价格]')"></div>
+        <div th:replace="fragments/crud/new-input :: number('price','[价格]')"></div>
+        <div th:replace="fragments/crud/new-input :: number('sort','![排序]')"></div>
+        <div th:replace="fragments/crud/submit :: submit('提交')"></div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<label th:fragment="default(name,label,isRequired)" class="col-sm-2 control-label" th:for="${name}"
+       th:text="${label +(isRequired? '*' : '')}"></label>
+</body>
+</html>

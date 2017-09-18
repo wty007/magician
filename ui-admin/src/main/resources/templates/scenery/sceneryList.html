@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<div class="container">
+    <h5>景点列表</h5>
+    <hr/>
+    <a class="btn btn-success" href="./form">增加</a>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="hide">ID</th>
+            <th>名称</th>
+            <th>简称</th>
+            <th>推荐</th>
+            <th>隐藏</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entity: ${page.content}">
+            <td class="hide" th:id="${entity.id}" th:text="${entity.id}">Oranges</td>
+            <td th:text="${entity.name}">Oranges</td>
+            <td th:text="${entity.subtitle}">Oranges</td>
+            <td>
+                <span th:if="${#bools.isTrue(entity.recommend)}" class="label label-success">推荐</span>
+                <span th:if="${#bools.isFalse(entity.recommend)}" class="label label-danger">不推荐</span>
+            </td>
+            <td>
+                <span th:if="${#bools.isTrue(entity.hide)}" class="label label-danger">隐藏</span>
+                <span th:if="${#bools.isFalse(entity.hide)}" class="label label-success">未隐藏</span>
+            </td>
+            <td><a class="btn btn-primary btn-sm" th:href="@{/scenery/form(id=${entity.id})}">修改</a>
+                <a class="btn btn-danger btn-sm"
+                   th:onclick="'del(\''+@{/scenery/delete}+'\',\'' + ${entity.id } +'\')'">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/common :: pagination"></div>
+</div>
+</body>
+</html>

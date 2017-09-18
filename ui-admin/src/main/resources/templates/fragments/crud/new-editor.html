@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+</head>
+<body>
+<div th:fragment="label-prototype(name,label,isRequired)" class="form-group">
+    <div th:if="${!#strings.isEmpty(label)}" th:remove="tag">
+        <label th:replace="fragments/crud/label :: default(${name},${label},${isRequired})"></label>
+    </div>
+    <div th:if="${#strings.isEmpty(label)}" th:remove="tag">
+        <div th:replace="fragments/crud/new-editor :: prototype(${name},${label},${isRequired})"></div>
+    </div>
+    <div th:if="${!#strings.isEmpty(label)}" th:remove="tag">
+        <div th:include="fragments/crud/new-editor :: prototype(${name},${label},${isRequired})"
+             class="col-sm-10"></div>
+    </div>
+</div>
+<div th:fragment="prototype(name,label,isRequired)">
+    <textarea th:id="${name}" th:name="${name}" class="required"></textarea>
+    <script th:inline="javascript">
+        var editorParam = {
+            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+            toolbars: [['FullScreen', 'Source', 'Undo', 'Redo', 'Bold', 'test']],
+            //focus时自动清空初始化时的内容
+            autoClearinitialContent: true,
+            //关闭字数统计
+            wordCount: false,
+            //关闭elementPath
+            elementPathEnabled: false
+        };
+
+        var fieldName = [[${name}]];
+
+        eval('var ' + [[${name}]] + 'Editor = UE.getEditor("' + [[${name}]] + '",editorParam);');
+        afterFetchFunctions.push(function (data) {
+            var evalString = [[${name}]] + 'Editor.ready(function () {'
+                    + [[${name}]] + 'Editor.setContent(data["' + [[${name}]] + '"]);'
+                    + '});'
+            eval(evalString);
+        });
+    </script>
+
+    <div th:if="${isRequired}" th:remove="tag">
+        <script th:replace="fragments/crud/valid :: default(${name},${label})"></script>
+    </div>
+</div>
+<div th:fragment="default(name,feature)"
+     th:replace="fragments/crud/new-editor :: label-prototype(${name},${#strings.contains(feature,'[')?(#strings.substring(feature,#strings.indexOf(feature,'[')+1,#strings.indexOf(feature,']'))):null},${!#strings.contains(feature,'!')})">
+</div>
+</body>
+</html>

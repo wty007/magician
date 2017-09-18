@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<script type="text/javascript" th:src="@{/static/js/plugins/My97DatePicker/WdatePicker.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.config.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.all.js}"></script>
+<div th:replace="fragments/common :: nav">nav</div>
+<script th:replace="fragments/crud/script :: all(@{/scenery})"></script>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{./list}">返回列表</a>
+    <hr/>
+    <form id="form" class="form-horizontal" th:action="@{/scenery/save}" method="post">
+        <div th:replace="fragments/crud/submit :: id"></div>
+        <div th:replace="fragments/crud/new-input :: text('name','[景点名称]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('pinyin','[拼音简码]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('openingTime','[开放时间]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('city','[所在城市]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('subtitle','![副标题]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('ticketTakingPlace','![取票地点]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('videoUrl','![视频地址]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('contactInformation','![景点联系方式]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('address','![地址]')"></div>
+
+        <div th:replace="fragments/crud/new-select :: dict('level','sceneryLevel','![景区级别]')"></div>
+
+        <div th:replace="fragments/crud/new-checkbox :: dict('subject','scenerySubject','![景区主题]')"></div>
+        <div th:replace="fragments/crud/new-checkbox :: dict('scenerySuitable','scenerySuitablePopulation','![适宜人群]')"></div>
+
+        <div th:replace="fragments/crud/new-input :: text('briefDescription','![简要描述]')"></div>
+        <div th:replace="fragments/crud/editor :: have-label('introduction','景点介绍')"></div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#traffic-guide" aria-controls="traffic-guide" role="tab"
+                   data-toggle="tab">交通指南</a></li>
+            <li role="presentation">
+                <a href="#buy_ticket_notes" aria-controls="buy_ticket_notes" role="tab"
+                   data-toggle="tab">预订须知</a>
+            </li>
+            <li role="presentation">
+                <a href="#characteristic_shopping" aria-controls="characteristic_shopping" role="tab"
+                   data-toggle="tab">位置距离</a></li>
+            <li role="presentation">
+                <a href="#specialty_food" aria-controls="specialty_food" role="tab"
+                   data-toggle="tab">特色食品</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="traffic-guide">
+                <div th:replace="fragments/crud/editor :: default('trafficGuide')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="buy_ticket_notes">
+                <div th:replace="fragments/crud/editor :: default('buyTicketNotes')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="characteristic_shopping">
+                <div th:replace="fragments/crud/editor :: default('characteristicShopping')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="specialty_food">
+                <div th:replace="fragments/crud/editor :: default('specialtyFood')"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label" for="briefDescription">状态:</span>
+            <div class="col-sm-10">
+                <input type="checkbox" name="hide" th:checked="${entity.hide}" id="hide"/><label for="hide">隐藏</label>
+                <input type="checkbox" name="recommend" th:checked="${entity.recommend}" id="recommend"/><label
+                    for="recommend">推荐</label>
+            </div>
+        </div>
+        <div th:replace="fragments/crud/new-input :: number('sort','![排序]')"></div>
+        <hr/>
+        <div th:replace="fragments/crud/submit :: submit('提交')"></div>
+    </form>
+</div>
+</body>
+</html>

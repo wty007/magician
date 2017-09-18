@@ -1,0 +1,28 @@
+server:
+  port: 8102
+
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-server
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: 123456
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+            defaultZone: http://localhost:8101/eureka/

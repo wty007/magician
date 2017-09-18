@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('签证列表')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<div class="container">
+    <h5>签证列表</h5>
+    <hr/>
+    <a class="btn btn-success" href="./form">增加</a>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="hide">ID</th>
+            <th>名称</th>
+            <th>推荐</th>
+            <th>隐藏</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="visa: ${page.content}">
+            <td class="hide" th:id="${visa.id}" th:text="${visa.id}">Oranges</td>
+            <td th:text="${visa.name}">Oranges</td>
+            <td>
+                <span th:if="${#bools.isTrue(visa.recommend)}" class="label label-success">推荐</span>
+                <span th:if="${#bools.isFalse(visa.recommend)}" class="label label-danger">不推荐</span>
+            </td>
+            <td>
+                <span th:if="${#bools.isTrue(visa.hide)}" class="label label-danger">隐藏</span>
+                <span th:if="${#bools.isFalse(visa.hide)}" class="label label-success">未隐藏</span>
+            </td>
+            <td><a class="btn btn-primary btn-sm" th:href="@{/visa/form(id=${visa.id})}">修改</a>
+                <a class="btn btn-danger btn-sm"
+                   th:onclick="'del(\''+@{/visa/delete}+'\',\'' + ${visa.id } +'\')'">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/common :: pagination"></div>
+</div>
+</body>
+</html>

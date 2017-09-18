@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('图片列表')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<div class="container">
+    <h5>图片列表</h5>
+    <hr/>
+    <a class="btn btn-success" href="./form">增加</a>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="hide">ID</th>
+            <th>URL</th>
+            <th>预览</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="hotel: ${page.content}">
+            <td class="hide" th:id="${hotel.id}" th:text="${hotel.id}">Oranges</td>
+            <td th:text="${hotel.url}">Oranges</td>
+            <td><img  style="height: 100px;width: 100px" th:src="${hotel.url}"/></td>
+            <!--<td>
+                <span th:if="${#bools.isTrue(hotel.recommend)}" class="label label-success">推荐</span>
+                <span th:if="${#bools.isFalse(hotel.recommend)}" class="label label-danger">不推荐</span>
+            </td>
+            <td>
+                <span th:if="${#bools.isTrue(hotel.hide)}" class="label label-danger">隐藏</span>
+                <span th:if="${#bools.isFalse(hotel.hide)}" class="label label-success">未隐藏</span>
+            </td>
+            <td><a class="btn btn-primary btn-sm" th:href="@{/hotel/form(id=${hotel.id})}">修改</a>
+                <a class="btn btn-danger btn-sm"
+                   th:onclick="'del(\''+@{/hotel/delete}+'\',\'' + ${hotel.id } +'\')'">删除</a>
+            </td>-->
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/common :: pagination">nav</div>
+</div>
+</body>
+</html>

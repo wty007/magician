@@ -1,0 +1,22 @@
+server:
+  port: 8101
+
+spring:
+  application:
+    name: eureka-server
+eureka:
+      instance:
+        hostname: localhost
+        lease-expiration-duration-in-seconds: 5
+        lease-renewal-interval-in-seconds: 5
+      client:
+        registerWithEureka: false
+        fetchRegistry: false
+        serviceUrl:
+                defaultZone: http://localhost:8101/eureka/
+      server:
+        enable-self-preservation: false
+
+endpoints:
+     shutdown:
+      enabled: true

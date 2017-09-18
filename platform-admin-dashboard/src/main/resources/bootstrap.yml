@@ -1,0 +1,15 @@
+server:
+  port: 8103
+
+spring:
+  application:
+    name: admin-dashboard
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+            defaultZone: http://localhost:8101/eureka/

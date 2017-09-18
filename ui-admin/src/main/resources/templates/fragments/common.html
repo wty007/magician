@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<nav class="navbar navbar-default" th:fragment="nav">
+</nav>
+
+<div th:fragment="input(name,label)">
+    <div class="form-group">
+        <span class="col-sm-2 control-label" th:for="${name}" th:text="${label}"></span>
+        <div class="col-sm-6">
+            <input type="text" th:name="${name}" th:id="${name}" class="form-control required"
+                   th:placeholder="${label}"/>
+        </div>
+    </div>
+</div>
+
+<ul class="pagination" th:fragment="pagination" th:if="${!#arrays.isEmpty(page.content)}">
+    <!-- 上一页 -->
+    <li th:if="${not page.first}" data-th-classappend="*{page.first} ? 'disabled' : ''">
+        <a th:href="@{${'./list'}(page=${page.number-1},size=${page.size})}" class="page-link"
+           data-th-attr="pageIndex=${page.number} - 1"
+           aria-label="Previous">
+            <span aria-hidden="true">«</span>
+        </a>
+    </li>
+
+    <!-- 迭代生成页码 -->
+    <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
+        data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''">
+        <a class="page-link" data-th-attr="pageIndex=${i} - 1"
+           th:href="@{${'./list'}(page=${i-1},size=${page.size})}">
+            <span data-th-text="${i}"></span>
+        </a>
+    </li>
+
+    <!-- 下一页 -->
+    <li th:if="${not page.last}" class="page-item" data-th-classappend="*{page.last} ? 'disabled' : ''">
+        <a th:href="@{${'./list'}(page=${page.number+1},size=${page.size})}" class="page-link"
+           data-th-attr="pageIndex=${page.number} + 1" aria-label="Next">
+            <span aria-hidden="true">»</span>
+        </a>
+    </li>
+</ul>
+</body>
+</html>

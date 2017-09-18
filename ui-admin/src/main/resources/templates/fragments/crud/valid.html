@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<script th:inline="javascript" th:fragment="default(name,label)">
+    messages = $.extend(messages, {[[${name}]]: '请填写' + [[${label}]]});
+    rules = $.extend(rules, {[[${name}]]: 'required'});
+</script>
+</body>
+</html>

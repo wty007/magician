@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('配置')">
+</head>
+<body>
+<div th:replace="fragments/common :: nav">nav</div>
+<div class="container">
+    <h5>配置</h5>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="isAfterAjaxSaveRedirectToListSwitch">保存后是否返回列表</label>
+            <div class="controls">
+                <div class="switch">
+                    <input id="isAfterAjaxSaveRedirectToListSwitch" type="checkbox"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    $("#isAfterAjaxSaveRedirectToListSwitch").bootstrapSwitch({
+        state: isTrue(getCookie("isAfterAjaxSaveRedirectToList")),
+        onSwitchChange: function (event, state) {
+            changeState(state);
+        }
+    });
+
+    function changeState(state) {
+        setCookie("isAfterAjaxSaveRedirectToList", isTrue(state));
+    }
+
+</script>
+</body>
+</html>

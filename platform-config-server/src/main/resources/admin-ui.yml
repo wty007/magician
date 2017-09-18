@@ -1,0 +1,11 @@
+spring:
+  thymeleaf:
+    cache: false
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG

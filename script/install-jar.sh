@@ -1,0 +1,4 @@
+mvn install:install-file -Dfile=../service-sms/libs/aliyun-java-sdk-dysmsapi-1.0.0-SANPSHOT.jar -DgroupId=aliyun.java.sdk.dysmsapi -DartifactId=dysmsapi -Dversion=1.0.0 -Dpackaging=jar
+mvn install:install-file -Dfile=../service-sms/libs/alicom-mns-receive-sdk-0.0.1-SNAPSHOT.jar -DgroupId=com.aliyun.alicom -DartifactId=alicom-mns-receive-sdk -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar
+mvn install:install-file -Dfile=../service-sms/libs/aliyun-sdk-mns-1.1.8.jar -DgroupId=com.aliyun.mns -DartifactId=aliyun-sdk-mns -Dversion=1.1.8 -Dpackaging=jar
+mvn install:install-file -Dfile=../service-sms/libs/aliyun-java-sdk-core-3.2.3.jar -DgroupId=com.aliyun -DartifactId=aliyun-java-sdk-core -Dversion=3.2.3 -Dpackaging=jar

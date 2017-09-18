@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/header :: head('')">
+</head>
+<body>
+<script type="text/javascript" th:src="@{/static/js/plugins/My97DatePicker/WdatePicker.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.config.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/plugins/ueditor/ueditor.all.js}"></script>
+<div th:replace="fragments/common :: nav">nav</div>
+<script th:replace="fragments/crud/script :: all(@{/visa})"></script>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{./list}">返回列表</a>
+    <hr/>
+    <form id="form" class="form-horizontal" th:action="@{/visa/save}" method="post">
+        <div th:replace="fragments/crud/submit :: id"></div>
+        <div th:replace="fragments/crud/new-input :: text('name','[签证名称]')"></div>
+        <div th:replace="fragments/crud/new-select :: dict('type','visaType','![签证类型]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('interview','![面试]')"></div>
+        <div th:replace="fragments/crud/new-input :: number('price','![签证价格]')"></div>
+        <div th:replace="fragments/crud/new-input :: number('commentsScore','![点评积分]')"></div>
+        <div th:replace="fragments/crud/new-input :: number('canUseScore','![抵用积分]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('validPeriod','![签证有效期]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('handleDuration','![办理时长]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('maximumStayTime','![最长停留时间]')"></div>
+        <div th:replace="fragments/crud/new-input :: text('entryTimes','![入境次数]')"></div>
+
+        <div>所需材料:</div>
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#serving-officer-materials-needed" aria-controls="serving-officer-materials-needed" role="tab"
+                   data-toggle="tab">在职人员</a></li>
+            <li role="presentation">
+                <a href="#freelancer-materials-needed" aria-controls="freelancer-materials-needed" role="tab"
+                   data-toggle="tab">自由职业者</a>
+            </li>
+            <li role="presentation">
+                <a href="#retiree-materials-needed" aria-controls="retiree-materials-needed" role="tab"
+                   data-toggle="tab">退休人员</a></li>
+            <li role="presentation">
+                <a href="#school-student-materials-needed" aria-controls="school-student-materials-needed" role="tab"
+                   data-toggle="tab">在校学校</a></li>
+            <li role="presentation">
+                <a href="#preschool-children-materials-needed" aria-controls="preschool-children-materials-needed"
+                   role="tab"
+                   data-toggle="tab">学龄前儿童</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="serving-officer-materials-needed">
+                <div th:replace="fragments/crud/editor :: default('servingOfficerMaterialsNeeded')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="freelancer-materials-needed">
+                <div th:replace="fragments/crud/editor :: default('freelancerMaterialsNeeded')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="retiree-materials-needed">
+                <div th:replace="fragments/crud/editor :: default('retireeMaterialsNeeded')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="school-student-materials-needed">
+                <div th:replace="fragments/crud/editor :: default('schoolStudentMaterialsNeeded')"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="preschool-children-materials-needed">
+                <div th:replace="fragments/crud/editor :: default('preschoolChildrenMaterialsNeeded')"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label" for="hide">状态:</span>
+            <div class="col-sm-10">
+                <input type="checkbox" name="hide" th:checked="${entity.hide}" id="hide"/><label for="hide">隐藏</label>
+                <input type="checkbox" name="recommend" th:checked="${entity.recommend}" id="recommend"/><label
+                    for="recommend">推荐</label>
+            </div>
+        </div>
+        <div th:replace="fragments/crud/new-input :: number('sort','![排序]')"></div>
+        <hr/>
+        <div th:replace="fragments/crud/submit :: default"></div>
+    </form>
+</div>
+</body>
+</html>

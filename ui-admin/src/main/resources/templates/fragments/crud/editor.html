@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="have-label(name,label)" class="form-group">
+    <span class="col-sm-2 control-label" th:for="${name}" th:text="${label}"></span>
+    <div class="col-sm-10">
+        <div th:replace="fragments/crud/editor :: default(${name})"></div>
+    </div>
+</div>
+<div th:fragment="default(name)" class="form-group">
+    <textarea th:id="${name}" th:name="${name}"></textarea>
+    <script th:inline="javascript">
+
+        var editorParam = {
+            //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+            toolbars: [['FullScreen', 'Source', 'Undo', 'Redo', 'Bold', 'test']],
+            //focus时自动清空初始化时的内容
+            autoClearinitialContent: true,
+            //关闭字数统计
+            wordCount: false,
+            //关闭elementPath
+            elementPathEnabled: false
+        };
+
+        var fieldName = [[${name}]];
+
+        eval('var ' + [[${name}]] + 'Editor = UE.getEditor("' + [[${name}]] + '",editorParam);');
+        afterFetchFunctions.push(function (data) {
+            var evalString = [[${name}]] + 'Editor.ready(function () {'
+                    + [[${name}]] + 'Editor.setContent(data["' + [[${name}]] + '"]);'
+                    + '});'
+            console.log(evalString);
+            eval(evalString);
+        });
+    </script>
+</div>
+</body>
+</html>
